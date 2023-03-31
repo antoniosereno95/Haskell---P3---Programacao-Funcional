@@ -1,0 +1,17 @@
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+
+sairImpar l = quicksort lf
+            where lf = filter odd l
+
+quicksort [] = []
+quicksort (x:xs) = quicksort menores ++ [x] ++ quicksort maiores
+                  where
+                      menores = [k | k <- xs, k <= x]
+                      maiores = [k | k <- xs, k > x]
+
+fibo = 0 : 1 : zipWith (+) fibo (tail fibo)
+fibo5 n = take n fibo
+

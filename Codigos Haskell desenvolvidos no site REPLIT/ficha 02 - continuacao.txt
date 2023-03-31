@@ -1,0 +1,17 @@
+--quetao 10
+import Data.List
+
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+comp :: String -> String
+comp s
+    |length s > 3 = "!" ++ show (length s) ++ [head s] 
+    |otherwise = s
+
+comprime2 :: String -> String
+comprime2 s = concat [ comp x | x <- group s]
+
+
+

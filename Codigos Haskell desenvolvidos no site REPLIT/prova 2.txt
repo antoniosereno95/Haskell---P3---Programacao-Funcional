@@ -1,0 +1,126 @@
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+
+--Prova 02
+--01
+dv f x = f (f x)
+
+--02
+--letra a ok *certa
+aux (x:xs) = tail (x:xs)
+aux2 (x:xs) = head (x:xs)
+
+terceiro1 (x:xs) = aux2 (tail (aux (x:xs))) 
+
+--letra b ok *creta
+terceiro2 (x:xs) = (x:xs) !! 2
+
+--letra c *meio certa
+terceiro3 [] = error "lista vazia"
+terceiro3 (x:xs) = tail (tail (x:xs)) !! 0
+
+
+--03
+--letra a ??? *certa
+tail1 [] = []
+tail1 (x:xs) = if (length (x:xs) == 0) 
+                then [] 
+                  else (tail (x:xs))
+
+--letra b ??? *certa
+tail2 [] = []
+tail2 (x:xs)
+    |(x:xs) == [] = []
+    |otherwise = tail (x:xs)
+
+--letra c ok *certa
+tail3 [] = []
+tail3 (x:xs) = tail (x:xs)
+
+--04
+
+
+
+--05 ok - certo e testado *certa
+primo n = if (length[x | x <- [1..n] , mod n x == 0] == 2) then True else False
+
+primos k = [y | y <- [1..k] , primo y]
+
+--06 *
+--shiftLeft :: Int -> [a] -> [a]
+aux5 (x:xs) = drop 1 (x:xs) ++ take 1 (x:xs)
+shiftLeft n [] = []
+shiftLeft 0 (x:xs) = (x:xs)
+shiftLeft 1 (x:xs) = drop 1 (x:xs) ++ take 1 (x:xs)
+shiftLeft n (x:xs) =  shiftLeft (n-1) (aux5 (x:xs))
+
+
+
+-------------
+Soluçao do Prof
+-------------
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+
+--Prova 02 resolvida pelo Prof Emanoel
+--01
+--o tipo da função 
+duasVezes :: (a -> a) -> a -> a
+duasVezes f x = f (f x)
+
+
+--02
+--a
+terceiro1 lista = head (tail (tail lista))
+
+--b
+terceiro2 lista = l !! 2
+
+--c
+terceiro3 (x:y:z:resto) = z 
+
+
+--03
+--a
+novoTail l = if l==[] then [] else tail l
+--outra soluçao, de luana dessa vez:
+tail2 l = if null l then [] else drop 1 l
+
+--b
+novoTail2 l
+    | null l = []
+    | otherwise tail l
+
+--c
+novotail3 [] = []
+novotail3 x:xs = xs
+-- **essa eu deuxei em branco na prova*
+
+
+--04
+--soluçao de luana:
+reverso [] = []
+reversp (x:xs) = reverso xs ++ [x]
+
+
+--05
+primo n = [x | x <- [1 .. n], mod n x == 0] == [1,n]
+
+primos n = [x | x <- [2..n], primo x]
+
+
+--06
+--a minha soluçao esta correta!! ihull
+
+
+
+
+
+
+
+
+

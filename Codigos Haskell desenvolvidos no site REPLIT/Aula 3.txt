@@ -1,0 +1,49 @@
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+--aula de compreenção de listas
+
+--exemplo 1
+fatores n = [x | x <- [1 ..n] , mod n x ==0]
+
+--exemplo 2
+primo n = fatores n == [1,n]
+-- retorna um booleano
+
+--exemplo 3
+primos n = [x | x <- [2 .. n], primo x]
+
+--exemplo 4
+buscar :: Eq a => a -> [(a,b)] -> [b]
+buscar k xs = [v | (key,v) <- xs, k == key]
+--a entrada é uma key e uma lista de tuplas.
+
+--outra forma de escrever a funçao buscar:
+buscar3 k xs = [t | t <- xs, k == fst t]
+--aqui(buscar3) a entrada tambem é uma lista de tuplas mas a busca se da pelo primrio elemento da tupla comparado a key pasada pelo usuario.
+
+buscar2 :: Eq a => a -> [a] -> [a]
+buscar2 k xs = [k | key <- xs, k == key]
+--esse buscar2 busca um lemento dnetro d euma lista.
+
+
+--exemplo 5
+--com o intuito de verificar se uma lista esta ordenanda, precisamos colcoar a lista em pares, e fazemos isso com a função zip.
+pares xs = zip xs (tail xs)
+--usamos a funão zip com a lista e o tail dela pois isso gera todos os pares possiveis da lista, ja que estamso dando um zip na lista com a propria lista menso o primeiro elemento(retorno da funçao tail).
+--com a lista de tuplas(que sao fomrados pelos pares) formada, podemos comparar as keys com as valeus das tuplas e ver se a subtraçao deles da um numero negativo, pois se der positivo, a lista nao estara ordenada.
+ordenada :: Ord a =>[a] -> Bool
+ordenada xs = length [x | (x,y) <- pares xs, x>y] <= 0
+--aqui usamos compreençao de lista para ja pegar a lista xs e usar o resultado dela depois de passar pela funçao "pares", dai é so comparar se os elementos de cada tuplas estao ordenados, no caso, o key ser menor que o value. essa compreençao de lsitas ira gerar uma lista que nao será vazia se a lista que queremos avaliar esta desordenada. dai é so meter um legth na lista resultado da ocmpreençao de listas e se o legth desse resultado for diferente de 0 ou maior que zero, é pq temso uma lista que nao esta ordenada!
+
+
+--outra forma de escrver a funçao ordenada
+ordenada2 xs = and [x<y | (x,y) <- pares xs]
+--aqui inves de avaliar cada elemento da lista com uma condiçao, colocamos a condiçao com elemento avaliativo e teremos um bool como retorno! dai é so meter um "and" em todos os bools retornados e teremos nosso resultado. a grande sacada aqui é colocar a condiçao da compreençao de listas como elemento avaliativo, que ai o retorno é um bool inves de um retorno do tipo de elemnto da lista ou retorno uma lista.
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+
+--Lista de exercícios 2 (exercício em sala) - nao vale ponto
+
+--questao 01 
+soma x y = x + y
+
+xor True True = False
+xor False False = False
+xor _ _ = True
+
+multi 0 _ = 0
+multi _ 0 = 0
+multi x y | xor (x<0) (y<0) = negate res
+          | otherwise = res
+          where res = soma (abs y) (multi ((abs x) - 1) (abs y))
+
+--de outra forma
+multi2 x y = sum (replicate (abs x) (abs y))
+
+
+--questao 02
+seqRaiz6 1 = sqrt 6
+seqRaiz6 n = sqrt (6 + seqRaiz6 (n-1))
+
+
+--questao 03
+maiorDaLista l = maiorDaListaAux (tail novaLista) (head novaLista)
+                  where
+                      novaLista = zip l [0 ..]
+maiorDaListaAux [] maiorAtual = maiorAtual
+maiorDaListaAux (x:xs) maiorAtual = if fst x > fst maiorAtual
+                                      then maiorDaLista xs x
+                                      else maiorDaLista xs maiorAtual
+--outra forma de resolver a questao 03
+maiorDaListaAux2 [] maior i = (maior , i)
+maiorDaListaAux2 (x:xs) tupla i = if x > fst tupla
+                                    then maiorDaLista xs (x,i) (i+1)
+                                    else maiorDaListaAux2 xs tupla (i+1)
+
+
+--questao 04
+dic = ["zero", "um", "nove"]
+
+converteString [] = []
+converteString l = map (dic !!) l
+
+
+--questao 05
+delPosisaoN n l = take n l ++ drop (n+1) l
+--take pega os elementos da lista ate a possiçao desejada e o drop tira todo so selementos da lista antes a posiçao, ai teremos dua spartes da lista onde iremos concatenar os dois slices das listas com o operador "++".
+
+--questao 06
+inserirPosicaoN2 n v l = take n l ++ [v] ++ drop n l 
+--com take e drop eu divido a lista em dois pedaços sem perder elementos e depois concateno uma nova lista com um unico elemento, no caso o que acabamso de receber "v" e concatenamos ele no meio dos sois slices da lista.
+
+inserirPosicaoN22 n v l = take n l ++ (v: drop n l)
+
+
+--questao 07
+posicaoN n l = l !! n
+
+
+--questao 08
+merge2 l1 [] = l1
+merge2 [] l2 = l2
+merge2 (x:xs) (y:ys) 
+              | x < y = x : merge2 xs (y:ys)
+              | otherwise = y : merge2 (x:xs) ys
+
+
+--questao 09

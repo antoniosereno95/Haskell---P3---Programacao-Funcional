@@ -1,0 +1,83 @@
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+--Lista de exercícios 2 (exercício em sala) - nao vale ponto
+
+--questao 01 - ok
+mutiplica x y = if y == 0 
+                  then 0  
+                  else if x == 0
+                          then x
+                          else y + mutiplica (x-1) y
+
+
+--questao 02 -- errado
+--n = sqrt 6 
+--questao_02 x = if x == 0 
+ --                 then n
+ --                 else n + sqrt(questao_02 x-1)
+
+
+--questao 03 - ok
+-----reprodução do quicksort do porfessor
+quicksort [] = []
+quicksort (x:xs) = quicksort menores ++ [x] ++ quicksort maiores
+                      where
+                          menores = [a | a <- xs, a <= x]
+                          maiores = [b | b <- xs, b > x]
+
+questao_03 lista = last (quicksort listaa)
+                      where 
+                        listaa = zip lista [0 .. length lista]
+
+
+--questao 07 - ok
+questao_07 n lista = lista !! n
+
+
+--questao 08 - ok
+questao_08 lista1 lista2 = quicksort (lista1 ++ lista2)
+
+--questao 09  - imcompleto
+questao_09 lista1 lista2 = head lista1
+
+
+--questao 04
+ ---por guardas
+nome_int :: Int -> String
+nome_int x | x==0 = "zero"
+            | x==1 = "um"
+            | x==2 = "dois"
+            | x==3 = "tres"
+            | x==4 = "quatro"
+            | x==5 = "cinco"
+            | x==6 = "seis"
+            | x==7 = "sete"
+            | x==8 = "oito"
+            | otherwise = "nove"
+
+questao_04 lista = map nome_int lista
+
+---por casamento de padroes, outra forma de fazer a questao 04
+--nome_int 0 = "zero"
+--nome_int 1 = "um"
+--nome_int 9 = "nove"
+
+
+-- abri um parenteses --
+--------Desenvolvendo a função map por recursividade
+map_recursivo::(a ->b) -> [a] -> [b]
+map_recursivo _ [] = []
+map_recursivo F (x:xs) = F x : map F xs
+--aqui a funçaõ F é aplicada na representação padrao de listas (x:xs) *cabeça e cauda* e o map recursivo funciona aplicando a função F na cabeca da lista "F x" o operador ":" serve para mostrar que ainda tem o resto da lista por vir *cauda* e aplica o map recursivo denovo(dessa vez é a forma recursiva de verdade) na cauda da função, e o operador ":" se encarrega de concatenar o elemento que foi aplicado a funçao F com o resto d alista que ainda vai ser utilizado.
+
+--------Desenvolvimento do Filtter por reursividade
+filter_R::(a -> Bool) -> [a] -> [a]
+filter_R F (x:xs) = if F x then x : filter_R F xs else filter_R F xs
+-- aqui nos testamos a funçao F no x que seria o item da lista que estamos avaliando no monento, e depois sendo o caso do if verdadeiro, colocamos o x na lista resultante e chamamos o filter_r denovo(de forma literalmenete recursiva) para ser aplicado na concatenação do x(que ja foi avaliado em relaçao a F) com a chamada recursiva que ira efetuar o mesmo metodo na cauda da lista, e isso so acontece *concatenaçao* por conta do operador ":".
+-- fecha o parenteses --
+
+
+
+

@@ -1,0 +1,56 @@
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+
+--questao 01
+somatotal s = sum [x*x | x <- [1..100] ]
+
+--questao 2
+grid m n = [ (x,y) | x <- [0..m], y <- [0..n] ]
+
+--questao bonus - fazendo um raplicate com comprençao de listas
+rep x n = [x | _ <- [1..n]] -- repete o x n vvezes -- o underline serve pq eu vou gerar vaios nada n vezes e colocar o x que seria o resultado do nada, mas como o nada nao muda o valor de x, logo ele so faz ficar repetindo varias vezes.
+
+--questao 03
+quadrado x = [ (x,y) | (x,y) <- grid x x , x /= y ]
+
+--questao 04
+-- solução igual a da questao bonus!!
+
+--questao 05
+pitag :: Int -> [(Int,Int,Int)]
+pitag n = [(x,y,z) | x <- [3..n], y <- [3..n], z <- [3..n] , x*x + y*y == z*z]
+
+
+--questao 06
+fatores n = [x | x <- [1 .. n], mod n x == 0]
+
+perfeitos :: Int -> [Int]
+perfeitos n = [x | x <- [1..n], x == sum (init (fatores x))] -- init joga fora o ultimo valor da lista
+
+
+--questao 07
+concatenar = concat [[(1,y) | y <- [3,4]], [(2,y)| y <- [3,4]]]
+
+--questao 08
+--posicoes :: Eq a => a -> [a] -> [Int]
+--posicoes x xs = [i | (z, i) <- zip xs [0 ..], x == z]
+
+buscar :: Eq a => a -> [(a,b)] -> [b]
+buscar k xs = [v | (k', v) <- xs, k == k']
+
+posicao2 :: Eq a => a -> [a] -> [Int]
+posicao2 k xs = buscar k (zip xs [0..])
+
+
+--questao 09
+produtoescalar :: Num c => [c] -> [c] -> c
+produtoescalar xs ys = sum [ x*y | (x, y) <- zip xs ys]
+
+produtoescalar2 xs ys = sum (zipWith (*) xs ys) --outra forma de fazer a questao utilizando a funçao "zipWith", mas nesse caso, nao temos mais o exercicios do asunto compreençao de listas
+
+--questao bonus!!: implementar o zipWith aqui ao vivo
+zipWith2 :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith2 k xs ys = [k x y | (x,y) <- zip xs ys]
+

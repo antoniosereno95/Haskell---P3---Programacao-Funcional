@@ -1,0 +1,120 @@
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+--questao 01
+fatorial 0 = 1
+fatorial n  | n >= 0 = n * fatorial (n - 1)
+            | otherwise = error "numeros negativos nao sao aceitos!"
+
+--questao 02
+soma :: Int -> Int
+soma 0 = 0
+soma 1 = 1
+soma n = n + soma (n - 1)
+
+soma2 n | n == 0 = 0
+        | n == 1 = 1
+        | otherwise = n + soma(n-1)
+
+--questao 03
+(^^^) :: (Eq a, Num a) => a -> a -> a
+m ^^^ 0 = 1
+m ^^^ 1 = m
+m ^^^ n = m * (m ^^^ (n - 1))
+
+--quetao 04
+euclides :: Int -> Int -> Int
+euclides x y | x==y = x
+             | x > y = euclides (x-y) y
+             | x < y = euclides x (y-x)
+
+--questao 05
+--letra a
+and2 :: [Bool] -> Bool
+and2 [] = True
+and2 (x:xs) 
+        | x == False = False 
+        | otherwise = True && and2 xs
+
+--letra b
+--contat3 [] = []
+--concat3 (x:xs) = x ++ head xs ++ concat3 tail xs
+
+--questao 5 - letra D
+(!!!) :: [a] -> Int -> a
+[] !!! n = error "lista vazia!"
+(x:xs) !!! n 
+  | n == 0 = x
+  | n >= length (x:xs) = error "indece fora do intervalo!"
+  | otherwise = xs !!! (n-1)
+
+
+
+--questao 06(merge)
+merge2 :: [a] -> [a] -> [a]
+merge2 = 
+
+
+------------------------------
+Soluçoes do Prof
+------------------------------
+
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+
+--questao 04
+euclides m n 
+          |m == n = m
+          |otherwise = euclides (max m n - min m n) (min m n)
+          
+--questao 05
+--letra a
+and2 :: [Bool] -> Bool
+and2 [] = True
+and2 (b:bs) = b && and2 bs
+
+--letra b
+concat3 [] = []
+concat3 (x:xs) = x ++ concat3 xs
+
+--letra c
+replicate2 0 _ = []
+replicate2 n v = v : replicate2 (n-1) v
+
+--letra e
+elem2 _ [] = False
+elem2 v (x:xs) 
+  |v == x = True
+  |otherwise = elem2 v (xs)
+
+
+--questao 06
+merge2 :: Ord a => [a] -> [a] -> [a]
+merge2 [] l = l
+merge2 l [] = l
+merge2 (x:xs) (y:ys)
+      |x <= y = [x] ++ merge2 (xs) (y:ys)
+      |otherwise = [y] ++ merge2 (x:xs) (ys)
+
+
+--questao 07
+metades :: [a] -> ([a],[a])
+metades l = (take n l , drop m l)
+          where 
+              tamanho = length l
+              m = tamanho `div` 2
+              n = if tamanho `mod` 2 == 1 then tamanho - m - 1
+              else tamanho - m
+
+
+
+
+
+--mergesort2 :: Ord a => [a] -> [a]
+
+
+
+

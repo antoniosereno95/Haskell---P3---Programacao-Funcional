@@ -1,0 +1,126 @@
+main = do
+  putStrLn "Hello"
+  putStrLn "World"
+
+
+--Ficha 01(prova)
+-- 01
+iguais a b c 
+            | a == b && b == c = 3
+            | a == b || b == c || c == a = 2
+            | otherwise = 0
+
+--10
+fatorial 0 = 1
+fatorial x = x * fatorial (x - 1)
+            
+combinacao n m = (fatorial n) / ((fatorial m)*(fatorial (n-m)))
+
+
+
+-- Ficha 02
+--questao 03 - ok
+-----reprodução do quicksort do porfessor
+quicksort [] = []
+quicksort (x:xs) = quicksort menores ++ [x] ++ quicksort maiores
+                      where
+                          menores = [a | a <- xs, a <= x]
+                          maiores = [b | b <- xs, b > x]
+
+questao_03 lista = last (quicksort listaa)
+                      where
+                        listaa = zip lista [0 .. length lista]
+
+
+--Ficha de recursao
+--01
+somaquadrada n = sum[x*x | x <- [(1)..(100)]]
+
+--02
+grid2 n m = [(x,y) | x <- [0..n], y<-[0..m]]
+
+--03
+quadrado x = [(n,m) | n <- [0..x], m<-[0..x], m/=n]
+
+--04
+replicate2 x e = [e | _ <-[1..x]]
+
+--05
+pitag x = [(x,y,z)|x<-[3..x],y<-[3..x],z<-[3..x],x*x + y*y == z*z]
+
+--06
+fatores n = [x | x<-[1..n], mod n x == 0]
+
+--perfeito n = [x| x<-[1..n], sum(init(fatores x)) == x]
+
+--09
+zipado (x:xs) (y:ys) = zip (x:xs) (y:ys)
+
+pe (x:xs) (y:ys) = [k | k <- zipado (x:xs) (y:ys)]
+
+po (x:xs) (y:ys) = sum[(x*y)| (x,y) <- pe (x:xs) (y:ys)]
+
+--questao 09 no modo GOD:
+produtoEscalar (x:xs) (y:ys) = sum[(x*y)| (x,y) <- zip (x:xs) (y:ys)]
+
+--Ficha de Recursividade
+--01
+fat 0 = 1
+fat n
+  | n < 0 = error "Nao aceitamos numeros negativos meu comparça"
+  |otherwise = n * fat(n-1)
+
+--02
+somar 0 = 0
+somar n = n + somar(n-1)
+
+--03
+(^^^) _ 0 = 1
+(^^^) m n = m * (^^^) m (n-1)
+
+--04
+eu x y 
+  |x == y = x
+  |x > y = eu (x-y) y
+  |otherwise = eu x (y-x)
+
+
+--08
+--a
+sli [] = 0
+sli (x:xs) = x + sli (xs)
+
+--b
+nil [] = 0
+nil (x:xs) = 1 + nil (xs)
+
+--c
+suel (x:xs) = if xs == [] then x else suel (xs)
+
+--ficha recursividade
+--05
+--c
+conl :: [[a]] -> [a]
+conl [] = []
+conl (x:xs) = head x : conl xs
+
+--d
+seel (x:xs) 0 = x
+seel (x:xs) n 
+  | n == 0 = x
+  | n >= length(x:xs) = error "fora de index"
+  | otherwise = seel (xs) (n-1)
+
+--e
+pnl [] _ = False
+pnl (x:xs) n 
+  | n == x = True
+  | otherwise = pnl (xs) n
+
+
+
+
+
+
+
+
